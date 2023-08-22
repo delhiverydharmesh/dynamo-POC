@@ -5,8 +5,9 @@ import { QueryCommand } from "@aws-sdk/client-dynamodb";
 const docClient = DynamoDBDocumentClient.from(client);
 
 export const main = async () => {
-	await getDataById();
-	await getDataByOnlyHashKey();
+	// await getDataById();
+	// await getDataByOnlyHashKey();
+	await getType();
 };
 
 
@@ -78,6 +79,20 @@ const getDataById= async ()=>{
 	console.log(response);
 }
 
+
+const getType= async ()=>{
+	const command = new GetCommand({
+		TableName: "entities_schema",
+		Key: {
+			id: "delhivery1##participantsabadab"
+			
+		},
+	});
+	
+
+	const response = await docClient.send(command);
+	console.log(response);
+}
 // const keyConditionExpression= "id = :id";
 const expressionAttributeValues = {
 	":id": `}`
@@ -86,3 +101,4 @@ const expressionAttributeValues = {
 (async () => {
 	await main();
 })();
+
